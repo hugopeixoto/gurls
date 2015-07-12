@@ -1,0 +1,15 @@
+gurls
+=====
+
+gurls greps standard input for URLs.
+
+
+examples
+--------
+
+  hugo@puter$ echo "<theo> http://hugopeixoto.net/ check this out" | gurls
+  http://hugopeixoto.net/
+  hugo@puter$
+
+  hugo@puter$ echo "<theo> no urls here" | gurls
+  hugo@puter$
