@@ -4,21 +4,19 @@
 #define HOSTCHARS "[a-z0-9._+-]"
 #define PATHCHARS "[a-z0-9._+#=?&:;%/!,~-]"
 
+static const char* url_re =
+  "(http|https)://"
+  "(" HOSTCHARS "+(:" HOSTCHARS "+)?@)?"
+  HOSTCHARS "+\\.[a-z]+"
+  "(/" PATHCHARS "*)?";
+
 int main() {
   char buffer[BUFSIZ];
 
   regex_t url;
   regmatch_t match[1];
 
-  int c = regcomp(
-      &url,
-      "\\([a-z]\\+://\\)\\?"
-      HOSTCHARS "\\+\\.[a-z]\\+/"
-      "\\(" PATHCHARS "\\+/\\?\\)*"
-      "\\(" PATHCHARS "\\+|(" PATHCHARS "\\+)\\)*"
-      ,
-      0);
-
+  int c = regcomp(&url, url_re, REG_EXTENDED | REG_ICASE);
   if (c != 0) {
     return -1;
   }
